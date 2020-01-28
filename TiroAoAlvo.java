@@ -1,17 +1,11 @@
 package pacott;
 import java.util.Scanner;
 public class TiroAoAlvo {
-        private Arco a1;
         private Flechas f1;
         private Inventario i1;
         private Scanner teclado = new Scanner(System.in);
-        public TiroAoAlvo(Arco a1, Inventario i1){
-            this.a1 = a1;
+        public TiroAoAlvo(Inventario i1){//Metodo construtor
             this.i1 = i1;
-        }
-        
-        public void setArco(Arco a1){
-            this.a1 = a1;
         }
         public void setFlechas(Flechas f1){
             this.f1 = f1;
@@ -31,25 +25,26 @@ public class TiroAoAlvo {
                         if(f1.getQtdFlechas() < 1){
                             System.out.println("Não há flechas suficientes!");
                         } else{
-                            a1.setCarregar(true);
+                            System.out.println("Teste: seu arco é modelo " + i1.getArcoAtual().getModeloArco() + " e tem força " + i1.getArcoAtual().getForcaArco());
+                            i1.getArcoAtual().setCarregar(true);
                             System.out.println("Arco armado! Pronto para o tiro!");
                         }
                         break;
                     case 2://ATIRAR
-                        if(!a1.isCarregado()){
+                        if(!i1.getArcoAtual().isCarregado()){
                             System.out.println("Arme o arco primeiro!");
                         } else{
-                            a1.atirar();
+                            i1.getArcoAtual().atirar();
                             f1.setQtdFlechas(f1.getQtdFlechas() - 1);
-                            pontuacao = (float)Math.random() * (a1.getForcaArco() + f1.getForcaFlecha());
+                            pontuacao = (float)Math.random() * (i1.getArcoAtual().getForcaArco() + f1.getForcaFlecha());
                             gp = 2 * (int)pontuacao;
                             System.out.printf("%.2f pontos! %d gold coins adquiridos!", pontuacao, gp);
                             i1.ganharOuro(gp);
                         }
                         break;
                     case 3:
-                        if(a1.isCarregado()){
-                            a1.setCarregar(false);
+                        if(i1.getArcoAtual().isCarregado()){
+                            i1.getArcoAtual().setCarregar(false);
                             System.out.println("Arco desarmado!");
                         } else{
                             System.out.println("O arco já está desarmado...");

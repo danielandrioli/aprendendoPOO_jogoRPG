@@ -6,10 +6,8 @@ public class MainMainMain {
             Arco arc1 = new Arco();
             Inventario inv1 = new Inventario(arc1);
                 inv1.ganharOuro(30); //Já sai ganhando 30 gold
-            Loja loj1 = new Loja();
-                loj1.setInventario(inv1);
-           // Flechas fle1 = new Flechas(); //Inicia com nada de flechas
-            TiroAoAlvo tir1 = new TiroAoAlvo(inv1.getArcoAtual(),inv1);
+            Loja loj1 = new Loja(inv1);
+            TiroAoAlvo tir1 = new TiroAoAlvo(inv1);
             System.out.println("Bem vindo!");
             int opc;
             do{

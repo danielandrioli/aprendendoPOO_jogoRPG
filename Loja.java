@@ -3,6 +3,9 @@ import java.util.Scanner;
 public class Loja {
         private Inventario i1;
         Scanner teclado = new Scanner(System.in);
+        public Loja(Inventario i1){
+            this.i1 = i1;
+        }
         private final int PRECOarcoRecurvo = 70;
         private final int PRECOarcoComposto = 120;
         private final int PRECOflechasMadeira = 1;
@@ -201,8 +204,5 @@ public class Loja {
             } else{
                 return false;
             }
-        }
-        public void setInventario(Inventario i1){ //Ao iniciar Main, devo criar um objeto inventario e settar esse metodo
-            this.i1 = i1;
         }
 }

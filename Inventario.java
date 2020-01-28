@@ -2,7 +2,7 @@ package pacott;
 public class Inventario {
     private int moedasOuro =0;
     private Arco a1;
-    private Flechas[] f1 = new Flechas[4]; //PODE SER ASSIM, SERÁ?
+    private Flechas[] f1 = new Flechas[4]; 
 //0 para flechas de madeira - 1 para de vidro - 2 inox - 3 obsidiana
     public Inventario(Arco a1) {
         this.a1 = a1;
@@ -34,6 +34,9 @@ public class Inventario {
         a1 = novoArco;
     }
     ////////FLECHAS
+    public void setFlechasAtuais(Flechas novaFlecha){
+        
+    }
     public Flechas getFlechasMadeira(){
         return f1[0]; 
     }
