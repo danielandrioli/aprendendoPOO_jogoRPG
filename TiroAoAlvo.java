@@ -1,7 +1,7 @@
 package pacott;
 import java.util.Scanner;
 public class TiroAoAlvo {
-        private Flechas f1;
+        private Flechas f1; //Flechas na aljava
         private Inventario i1;
         private Scanner teclado = new Scanner(System.in);
         public TiroAoAlvo(Inventario i1){//Metodo construtor

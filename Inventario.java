@@ -34,9 +34,14 @@ public class Inventario {
         a1 = novoArco;
     }
     ////////FLECHAS
+    /*
     public void setFlechasAtuais(Flechas novaFlecha){
-        
+        flechasAtuais = novaFlecha;
     }
+    public Flechas getFlechasAtuais(){
+        return flechasAtuais;
+    } */
+    
     public Flechas getFlechasMadeira(){
         return f1[0]; 
     }
