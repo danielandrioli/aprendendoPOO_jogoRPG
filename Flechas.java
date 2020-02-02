@@ -25,16 +25,16 @@ public class Flechas {
     private void setForcaFlecha(String modelo){
         switch(modelo){
             case "madeira":
-                forcaFlecha = 2;
+                forcaFlecha = 1;
                 break;
             case "vidro":
-                forcaFlecha = 3;
+                forcaFlecha = 2;
                 break;
             case "inox":
-                forcaFlecha = 4;
+                forcaFlecha = 3;
                 break;
             case "obsidiana":
-                forcaFlecha = 6;
+                forcaFlecha = 5;
                 break;
             default:
                 break;

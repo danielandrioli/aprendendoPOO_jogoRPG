@@ -37,8 +37,7 @@ public class Stand {
                             f1.setQtdFlechas(f1.getQtdFlechas() - 1);
                             pontuacao = (float)Math.random() * (i1.getArcoAtual().getForcaArco() +(float) p1.getHabilidade()); //DEIXAR ESSA FORMULA?
                             System.out.println("Pontuacao: " + pontuacao);
-                            p1.setPorcentHab(p1.getPorcentHab() + 20/(p1.getHabilidade()));//TALVEZ TENHA QUE AJUSTAR ESSA FORMULA
-                  //Quanto menos habilidoso, mais rápido a porcentHabilidade avança!
+                            p1.setPorcentHab();
                         }
                         break;
                     case 3:

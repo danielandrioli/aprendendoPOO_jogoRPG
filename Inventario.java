@@ -3,6 +3,7 @@ public class Inventario {
     private int moedasOuro =0;
     private Arco a1;
     private Flechas[] f1 = new Flechas[4]; 
+    private int pocaoMagica;
 //0 para flechas de madeira - 1 para de vidro - 2 inox - 3 obsidiana
     public Inventario(Arco a1) {
         this.a1 = a1;
@@ -53,5 +54,12 @@ public class Inventario {
     }
     public Flechas getFlechasObsidiana(){
         return f1[3];
+    }
+    
+    public int getPocaoMagica(){
+        return pocaoMagica;
+    }
+    public void setPocaoMagica(int num){
+        this.pocaoMagica = num;
     }
 }
