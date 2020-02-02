@@ -12,6 +12,8 @@ public class Loja {
         private final int PRECOflechasVidro = 2;
         private final int PRECOflechasInox = 3;
         private final int PRECOflechasObsidiana = 5;
+        private final int PRECOpocaoMagica = 35;
+        private final int PRECOsuperPocaoMagica = 60;
         
         private final int PRECOvendaArcoArtesanal = 20;
         private final int PRECOvendaArcoRecurvo = PRECOarcoRecurvo/2 + 10;
@@ -32,7 +34,8 @@ public class Loja {
                        System.out.println("ITENS À VENDA:\n[1] Arco recurvo - $ 70,00;\n[2] Arvo composto - $ 120,00;\n"
                                + "[3] Flechas de madeira - $1,00/un;\n"
                                + "[4] Flechas de vidro - $2,00/un;\n[5] Flechas de Inox - $3,00/un;\n"
-                               + "[6] Flechas de obsidiana - $5,00/un;\n[7] Sair."
+                               + "[6] Flechas de obsidiana - $5,00/un;\n[7] Poções magicas:  comum - $35,00/un  |  super - $60,00/un;\n"
+                               + "[8] Sair."
                                + "\n\nDinheiro disponível: "+i1.getMoedasOuro()+" moedas de ouro.\nEscolha uma opcao:");
                         opc = teclado.nextInt();
                         switch(opc){
@@ -53,7 +56,7 @@ public class Loja {
                                     }
                                 }
                                 if(!maisAlgumaCoisa()){ //Se retornar falso, opc valerá 7 e sairá do menu de compras
-                                    opc = 7;
+                                    opc = 8;
                                 }
                                 break;
                             case 2: //ARCO COMPOSTO
@@ -73,7 +76,7 @@ public class Loja {
                                      }
                                  }
                                  if(!maisAlgumaCoisa()){
-                                    opc = 7;
+                                    opc = 8;
                                  }
                                 break;
                             case 3: //FLECHAS DE MADEIRA
@@ -88,7 +91,7 @@ public class Loja {
                                     System.out.println("Você tem agora " + i1.getMoedasOuro() + " moedas de ouro.");
                                 }
                                 if(!maisAlgumaCoisa()){
-                                    opc = 7;
+                                    opc = 8;
                                 }
                                 break;
                             case 4: //FLECHAS DE VIDRO
@@ -103,7 +106,7 @@ public class Loja {
                                     + " moedas. Você tem agora " + i1.getMoedasOuro() + " moedas de ouro.");
                                 }
                                 if(!maisAlgumaCoisa()){
-                                    opc = 7;
+                                    opc = 8;
                                 }
                                 break;
                             case 5: //FLECHAS INOX
@@ -118,7 +121,7 @@ public class Loja {
                                     + " moedas. Você tem agora " + i1.getMoedasOuro() + " moedas de ouro.");
                                 }
                                 if(!maisAlgumaCoisa()){
-                                    opc = 7;
+                                    opc = 8;
                                 }
                                 break;
                             case 6: //FLECHAS OBSIDIANA
@@ -133,16 +136,46 @@ public class Loja {
                                     + " moedas. Você tem agora " + i1.getMoedasOuro() + " moedas de ouro.");
                                 }
                                 if(!maisAlgumaCoisa()){
-                                    opc = 7;
+                                    opc = 8;
                                 }
                                 break;
                             case 7:
+                                System.out.println("Qual você gostaria de comprar?\n[1] Poção comum - [2] Super poção");
+                                int respoPocao;
+                                int qtd;
+                                do{
+                                    respoPocao = teclado.nextInt();
+                                    if(respoPocao != 1 && respoPocao != 2){
+                                        System.out.println("Digito invalido! Digite novamente!");
+                                    }
+                                }while(respoPocao != 1 && respoPocao != 2);
+                                System.out.println("Quantas você gostaria de comprar?");
+                                qtd = teclado.nextInt(); 
+                                if(respoPocao == 1){
+                                    if(i1.getMoedasOuro() < (qtd * PRECOpocaoMagica)){
+                                        System.out.println("Você não tem dinheiro suficiente!");
+                                    }else{
+                                        i1.gastarOuro(qtd * PRECOpocaoMagica);
+                                        i1.setPocaoMagica(i1.getPocaoMagica() + qtd);
+                                        System.out.println("Compra realizada com sucesso!");
+                                    } 
+                                }else{
+                                    if(i1.getMoedasOuro() < (qtd * PRECOsuperPocaoMagica)){
+                                        System.out.println("Você não tem dinheiro suficiente!");
+                                    }else{
+                                        i1.gastarOuro(qtd * PRECOsuperPocaoMagica);
+                                        i1.setSuperPocaoMagica(i1.getSuperPocaoMagica() + qtd);
+                                        System.out.println("Compra realizada com sucesso!");
+                                    }
+                                }
+                                break;
+                            case 8:
                                 System.out.println("Obi: Tudo bem!");
                                 break;
                             default:
                                 System.out.println("Digito inválido!");
                         }
-                  }while(opc != 7); 
+                  }while(opc != 8); 
                }else if(opc2 == 2){//PARTE DAS VENDAS
                    do{
                         System.out.println("Obi: O que desejas me vender?:\n[1] Arco artesanal - $ " +PRECOvendaArcoArtesanal + 

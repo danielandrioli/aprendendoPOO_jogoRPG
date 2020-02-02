@@ -84,14 +84,44 @@ public class Floresta {
                             } 
                             break;
                         case 3:
-                            if(i1.getPocaoMagica() > 0){//Se houver pocao magica no inventario...
-                                //fazer a formula para aumento de vida
-                                if(acaoDoBicho() == 0){
-                                    opc = 4;
-                                    resp = 2;
+                            System.out.println("Qual você gostaria de usar?\n[1] Pocão mágica comum - [2] Super pocão mágica.");
+                            int respoPocao;
+                            do{
+                                respoPocao = teclado.nextInt();
+                                if(respoPocao != 1 && respoPocao != 2){
+                                    System.out.println("Digito invalido! Responda novamente!");
+                                }
+                            }while(respoPocao != 1 && respoPocao != 2);
+                            if(respoPocao == 1){
+                                if(i1.getPocaoMagica() > 0){//Se houver pocao magica no inventario...
+                                    i1.setPocaoMagica(i1.getPocaoMagica() -1);
+                                    p1.setVida(p1.getVida() + (int)(20 + (float)Math.random()*10)); //Pocao magica comum recupera de 20 a 30 de vida (fazer a super)
+                                    if(p1.getVida() > p1.getVidaTotal()){
+                                        p1.setVida(p1.getVidaTotal());
+                                    }
+                                    System.out.println("Sente-se melhor? Sua vida agora: "+p1.getVida()+"/"+p1.getVidaTotal());
+                                    if(acaoDoBicho() == 0){
+                                        opc = 4;
+                                        resp = 2;
+                                    }
+                                }else{
+                                    System.out.println("Você não tem poção mágica comum!"); //sem DanoDoBicho() aqui
                                 }
                             }else{
-                                System.out.println("Você não tem poção mágica!"); //sem DanoDoBicho() aqui
+                              if(i1.getPocaoMagica() > 0){//Se houver pocao magica no inventario...
+                                    i1.setSuperPocaoMagica(i1.getSuperPocaoMagica() -1);
+                                    p1.setVida(p1.getVida() + (int)(40 + (float)Math.random()*15)); //Pocao magica comum recupera de 20 a 30 de vida (fazer a super)
+                                    if(p1.getVida() > p1.getVidaTotal()){
+                                        p1.setVida(p1.getVidaTotal());
+                                    }
+                                    System.out.println("Sente-se melhor? Sua vida agora: "+p1.getVida()+"/"+p1.getVidaTotal());
+                                    if(acaoDoBicho() == 0){
+                                        opc = 4;
+                                        resp = 2;
+                                    }
+                                }else{
+                                    System.out.println("Você não tem super poção mágica!"); //sem DanoDoBicho() aqui
+                                }  
                             }
                             break;
                         case 4:
@@ -108,9 +138,9 @@ public class Floresta {
                     }
                 }while(opc != 4);
             }else if(resp == 3){
-                System.out.println("Vida: "+p1.getVida()+"/"+p1.getVidaTotal()+"\nSkill de arqueria: "+p1.getHabilidade()+
+                System.out.println("Vida: "+p1.getVida()+"/"+p1.getVidaTotal()+"\nNivel: "+p1.getNivel()+" - Skill de arqueria: "+p1.getHabilidade()+
                         "\nFlechas de "+f1.getModeloFlecha()+" disponíveis: "+f1.getQtdFlechas()+
-                        "\nPoções mágicas disponíveis: FAZER");
+                        "\nPoções mágicas disponíveis: Comuns: "+i1.getPocaoMagica()+" - Super: "+i1.getSuperPocaoMagica());
             }
         }while(resp != 2);
     }

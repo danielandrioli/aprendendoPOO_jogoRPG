@@ -16,7 +16,7 @@ public class MainMainMain {
             int opc;
             do{
                 System.out.println("\nMENU  -  Escolha uma opção:\n[1] Acessar a loja;\n[2] Praticar tiro ao alvo;\n"+
-               "[3] Ir caçar na floresta;\n[4] Seus itens;\n[5] Seu status;\n[6] Sair do jogo.");
+               "[3] Ir caçar na floresta;\n[4] Seus itens;\n[5] Seu status;\n[6] Recuperar vida;\n[7] Sair do jogo.");
                 opc = teclado.nextInt();
                 switch(opc){
                     case 1:
@@ -56,17 +56,59 @@ public class MainMainMain {
                         } else{
                             System.out.println("Seu arco é do modelo "+inv1.getArcoAtual().getModeloArco());
                         }
+                        System.out.println("Pocões mágicas comuns: "+inv1.getPocaoMagica()+" - Super pocões mágicas: "+inv1.getSuperPocaoMagica());
                         System.out.println("Flechas: você tem\n"+ inv1.getFlechasMadeira().getQtdFlechas()+" flechas de madeira;\n"
                         +inv1.getFlechasVidro().getQtdFlechas()+" flechas de vidro;\n" + inv1.getFlechasInox().getQtdFlechas()+" flechas de Inox;\n"
                         +inv1.getFlechasObsidiana().getQtdFlechas()+" flechas de obsidiana;\n");
                         break;
                     case 5:
                         System.out.println("Você tem " + p1.getExp() + " de experiencia e é nível " + p1.getNivel()+"."+
-                           " Falta "+(100 - p1.getPorcentNiv())+ "% para subir de nível.\nSeu skill com arco é " + p1.getHabilidade() + 
-                                " e falta "+(100-p1.getPorcentHab())+"% para "
-                        + "o próximo nível.\nVocê tem " + p1.getVida() + "/"+p1.getVidaTotal()+" de vida.");
+                           " Faltam "+(100*p1.getNivel() - (p1.getExp() - p1.getExpDesseNivel()))+" pontos de experiencia para"
+                                + " subir de nível ("+(100 - p1.getPorcentNiv())+ "%)"
+                           + "\nSeu skill com arco é " + p1.getHabilidade() + " e falta "+(100-p1.getPorcentHab())+"% para "
+                           + "o próximo nível.\nVocê tem " + p1.getVida() + "/"+p1.getVidaTotal()+" de vida.");
                         break;
-                    case 6:
+                    case 6 :
+                        System.out.println("Sua vida: "+p1.getVida()+"/"+p1.getVidaTotal()+"\nEscolha o que usar:\n"
+                                + "[1] Pocão mágica comum - [2] Super pocão mágica.");
+                        int esco;
+                        do{
+                           esco = teclado.nextInt();
+                           if(esco != 1 && esco != 2){
+                               System.out.println("Digito inválido! Escolha novamente:");
+                           }
+                        }while(esco != 1 && esco != 2);
+                        if(esco == 1){
+                            if(inv1.getPocaoMagica() == 0){
+                                System.out.println("Você não tem pocões mágicas comuns!");
+                            }else{
+                                inv1.setPocaoMagica(inv1.getPocaoMagica() -1);
+                                int vidaRecuperada;
+                                vidaRecuperada = (int)(20 + (float)Math.random()*10);
+                                if(vidaRecuperada > p1.getVidaTotal() - p1.getVida()){
+                                    vidaRecuperada = p1.getVidaTotal() - p1.getVida();
+                                }
+                                System.out.println("Vida recuperada: "+vidaRecuperada);
+                                p1.setVida(p1.getVida() + vidaRecuperada);
+                                System.out.println("Sua vida agora: "+p1.getVida()+"/"+p1.getVidaTotal());
+                            }
+                        } else{
+                            if(inv1.getSuperPocaoMagica() == 0){
+                                System.out.println("Você não tem super pocões mágicas!");
+                            } else{
+                                inv1.setSuperPocaoMagica(inv1.getSuperPocaoMagica() - 1);
+                                int vidaRecuperada;
+                                vidaRecuperada = (int)(40 + (float)Math.random()*15);
+                                if(vidaRecuperada > p1.getVidaTotal() - p1.getVida()){
+                                    vidaRecuperada = p1.getVidaTotal() - p1.getVida();
+                                }
+                                System.out.println("Vida recuperada: "+vidaRecuperada);
+                                p1.setVida(p1.getVida() + vidaRecuperada);
+                                System.out.println("Sua vida agora: "+p1.getVida()+"/"+p1.getVidaTotal());
+                            }
+                        }
+                        break;
+                    case 7:
                         System.out.println("Tem certeza que quer sair do jogo? [S / N]");
                         char sair;
                         do{
@@ -75,12 +117,12 @@ public class MainMainMain {
                                 System.out.println("Digito inválido! Responda novamente:");
                             }
                         }while(sair != 's' && sair != 'S' && sair != 'n' && sair != 'N');
-                        opc = (sair == 's' || sair == 'S')?6:0;
+                        opc = (sair == 's' || sair == 'S')?7:0;
                         break;
                     default:
                         System.out.println("Digito inválido!");
                 }
-            }while(opc != 6);
+            }while(opc != 7);
             System.out.println("Até logo!");
         }
 }

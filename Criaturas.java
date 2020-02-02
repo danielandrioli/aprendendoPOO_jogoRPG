@@ -16,7 +16,7 @@ public class Criaturas {
         rato.nome = "Rato";     //Se nao der, faço recorto esse metodo para a classe Floresta (q criarei)
         rato.vidaTotal = 15;
         rato.vida = rato.vidaTotal;
-        rato.poder = 6;
+        rato.poder = 3;
         rato.grunhidos[0] = "Meeeeeep";
         rato.grunhidos[1] = "Meeep meep meep";
         rato.grunhidos[2] = "Meep"; //CRIAR UM IF ANIMAL.GRUNHIDOS !EQUALS A "", ENTAO MANDA ELE FALAR
@@ -28,7 +28,7 @@ public class Criaturas {
             troll.nome = "Troll";
             troll.vidaTotal = 25;
             troll.vida = troll.vidaTotal;
-            troll.poder = 10;
+            troll.poder = 6;
             troll.grunhidos[0] = "Gruntzz";
             troll.grunhidos[1] = "Grooaarr";
             troll.grunhidos[2] = "hmmm, bug!";
@@ -40,7 +40,7 @@ public class Criaturas {
             orc.nome = "Orc";
             orc.vidaTotal = 35;
             orc.vida = orc.vidaTotal;
-            orc.poder = 15;
+            orc.poder = 12;
             orc.grunhidos[0] = "Graaak zuurk!";
             orc.grunhidos[1] = "GgRaaaR arR ar!";
             orc.grunhidos[2] = "RAAAAAr";
@@ -52,7 +52,7 @@ public class Criaturas {
             dwarf.nome = "Dwarf";
             dwarf.vidaTotal = 40;
             dwarf.vida = dwarf.vidaTotal;
-            dwarf.poder = 18;
+            dwarf.poder = 15;
             dwarf.grunhidos[0] = "Hail Durin!";
             dwarf.grunhidos[1] = "HgRoar!! Renda-se! Anões dominarão o mundo!";
             dwarf.grunhidos[2] = "GrAAah! Prepare-se para um golpe baixo!";
@@ -64,15 +64,50 @@ public class Criaturas {
              minotauro.nome = "Minotauro";
              minotauro.vidaTotal = 50;
              minotauro.vida = minotauro.vidaTotal;
-             minotauro.poder = 22;
+             minotauro.poder = 20;
              minotauro.grunhidos[0] = "Kaplar!";
              minotauro.grunhidos[1] = "MUUUUUHhhhhh";
              minotauro.grunhidos[2] = "mmmmmmmMUUUUUUUUUUUH";
              minotauro.lootGold = (int)(7 * ((float)Math.random() * 10));
              minotauro.expDada = 80;
              return minotauro;
-         } else 
-            return null; //quando já ter criado criaturas o suficiente, apagar essa parte. O programa fica chiando até o último else ter return
+         } else if(numRand <= 30){
+             Criaturas demonhozinho = new Criaturas();
+             demonhozinho.nome = "Demonhozinho";
+             demonhozinho.vidaTotal = 70;
+             demonhozinho.vida = demonhozinho.vidaTotal;
+             demonhozinho.poder = 30;
+             demonhozinho.grunhidos[0] = "AaHAhahAhaha";
+             demonhozinho.grunhidos[1] = "Vou puxar seu pé enquanto dorme!!";
+             demonhozinho.grunhidos[2] = "Salve Edir Macedo!";
+             demonhozinho.lootGold = (int)(10 * ((float)Math.random() * 10));
+             demonhozinho.expDada = 100;
+             return demonhozinho;
+         } else if(numRand <= 35){
+             Criaturas dragao = new Criaturas();
+             dragao.nome = "Dragão";
+             dragao.vidaTotal = 90;
+             dragao.vida = dragao.vidaTotal;
+             dragao.poder = 40;
+             dragao.grunhidos[0] = "FFfChhhhhhhhh";
+             dragao.grunhidos[1] = "GraAAAAAAAAArrr";
+             dragao.grunhidos[2] = "Fchchhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh";
+             dragao.lootGold = (int)(12 * ((float)Math.random() * 10));
+             dragao.expDada = 135;
+             return dragao;
+         } else{
+             Criaturas dragaoAnciao = new Criaturas();
+             dragaoAnciao.nome = "Dragão Ancião";
+             dragaoAnciao.vidaTotal = 120;
+             dragaoAnciao.vida = dragaoAnciao.vidaTotal;
+             dragaoAnciao.poder = 55;
+             dragaoAnciao.grunhidos[0] = "Sua alma é minha!";
+             dragaoAnciao.grunhidos[1] = "Hummm, chegou a janta!";
+             dragaoAnciao.grunhidos[2] = "FccHcchcHchhhhhhh";
+             dragaoAnciao.lootGold = (int)(15 * ((float)Math.random() * 10));
+             dragaoAnciao.expDada = 180;
+             return dragaoAnciao;
+         }
     }
 
     public int getVida() {
