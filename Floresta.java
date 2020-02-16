@@ -1,15 +1,31 @@
 package pacott;
+import pacott.criaturas.*; //Importando todas as classes do pacote de criaturas
+
 import java.util.Scanner;
 public class Floresta {
-    private Personagem p1;
+    private final int numTotalDeCriaturas = 10; //Esse numero pode mudar conforme mais forem criadas
+    private Criaturas listaCriaturas[] = new Criaturas[numTotalDeCriaturas];
+    private Personagem p1; 
     private Flechas f1;
-    private Criaturas c1;
+    private Criaturas c1;//Objeto de uma super-classe abstrata. Será que recebe qualquer objeto de classe ancestral?
     private Inventario i1;
     Scanner teclado = new Scanner(System.in);
+    
     
     public Floresta(Personagem p1, Inventario i1){ //FAZER A CHAMADA EM MAIN
         this.p1 = p1;
         this.i1 = i1;
+        //Teste para reduzir o numero de if's na hora de escolher a criatura aleatória:
+        listaCriaturas[0] = new Rato(); // E se a classe Rato ter mais que o q Criaturas tem? Poderei usar tais metodos?
+        listaCriaturas[1] = new Troll();
+        listaCriaturas[2] = new Orc();
+        listaCriaturas[3] = new Dwarf();
+        listaCriaturas[4] = new Minotauro();
+        listaCriaturas[5] = new GadoFurioso();
+        listaCriaturas[6] = new Demonhozinho();
+        listaCriaturas[7] = new Dragao();
+        listaCriaturas[9] = new WildPauloKogos();
+        listaCriaturas[8] = new DragaoAnciao();
     }
     public void naFloresta(){
         System.out.println("Bem-vindo à floresta!");
@@ -25,118 +41,9 @@ public class Floresta {
                }
             }while(resp != 1 && resp != 2 && resp != 3);
             if(resp == 1){
-                c1 = new Criaturas().getCriatura((int)(p1.getNivel() * (10 * Math.random())));
-                int opc;
-                System.out.println("Você está andando pela floresta, e de repente...\nUm "+c1.getNome()+" aparece na sua frente!");
-            //mostrar status dele e as opcoes q o personagem tem
-                System.out.println(c1.getVida()+"/"+c1.getVidaTotal()+" de vida.");
-                System.out.println(c1.getNome()+": "+c1.getGrunhidos());
-                System.out.println("O que você deseja fazer?\n");
-                do{
-                    System.out.println("Flechas de "+f1.getModeloFlecha()+": "+f1.getQtdFlechas());
-                    System.out.println("[1] Atacar - [2] Trocar flechas - [3] Usar pocao magica - [4] Fugir.");
-                    do{
-                        opc = teclado.nextInt();
-                        if(opc < 1 || opc > 4){
-                            System.out.println("Digito inválido! Responda novamente:");
-                        }
-                    } while(opc < 1 || opc > 4);
-                    switch(opc){
-                        case 1:
-                            int seuDano;
-                            //FAZER
-                            //Formula de dano com arco + flecha + skill + nivel
-
-                            if(f1.getQtdFlechas() > 0){
-                                i1.getArcoAtual().setCarregar(true);
-                                i1.getArcoAtual().atirar();
-                                f1.setQtdFlechas(f1.getQtdFlechas() - 1);
-                                seuDano = getFormulaSeuDano();
-                                p1.setPorcentHab();//EVOLUINDO SKILL A CADA TIRO
-                                c1.setVida(c1.getVida() - seuDano);
-                                if(c1.getVida() < 0){
-                                    c1.setVida(0);
-                                }
-                                System.out.println("Você causou "+seuDano+" de dano no "+c1.getNome()+". Vida: "+c1.getVida()+"/"+c1.getVidaTotal());
-                                p1.setPorcentHab(); //Avança um pouco de skill a cada pancada no bicho!
-                            }else{
-                                System.out.println("Você não tem flechas de "+f1.getModeloFlecha()+" suficientes! Escolha outra ou fuja!");
-                            }                    
-                            if(c1.getVida() <= 0){
-                                System.out.println("Você matou o "+c1.getNome()+" e recebeu "+c1.getExpDada()+" de experiência!");
-                                p1.setExp(p1.getExp() + c1.getExpDada());
-                                System.out.println("Sua experiência agora: "+p1.getExp());
-                                System.out.println("Loot: "+c1.getLootGold()+" moedas de ouro.");
-                                i1.ganharOuro(c1.getLootGold());
-                                opc = 4; //Aí sai da batalha
-                            }else{
-                                if(acaoDoBicho() == 0){
-                                    opc = 4;
-                                    resp = 2;
-                                }//Se morreu durante a luta, opc recebe 4 e entao sai da floresta
-                            }
-                            break;
-                        case 2:
-                            trocarFlechas(); //Apos trocar as flechas, seu turno passou e a criatura te ataca
-                            if(acaoDoBicho() == 0){
-                                opc = 4;
-                                resp = 2;
-                            } 
-                            break;
-                        case 3:
-                            System.out.println("Qual você gostaria de usar?\n[1] Pocão mágica comum - [2] Super pocão mágica.");
-                            int respoPocao;
-                            do{
-                                respoPocao = teclado.nextInt();
-                                if(respoPocao != 1 && respoPocao != 2){
-                                    System.out.println("Digito invalido! Responda novamente!");
-                                }
-                            }while(respoPocao != 1 && respoPocao != 2);
-                            if(respoPocao == 1){
-                                if(i1.getPocaoMagica() > 0){//Se houver pocao magica no inventario...
-                                    i1.setPocaoMagica(i1.getPocaoMagica() -1);
-                                    p1.setVida(p1.getVida() + (int)(20 + (float)Math.random()*10)); //Pocao magica comum recupera de 20 a 30 de vida (fazer a super)
-                                    if(p1.getVida() > p1.getVidaTotal()){
-                                        p1.setVida(p1.getVidaTotal());
-                                    }
-                                    System.out.println("Sente-se melhor? Sua vida agora: "+p1.getVida()+"/"+p1.getVidaTotal());
-                                    if(acaoDoBicho() == 0){
-                                        opc = 4;
-                                        resp = 2;
-                                    }
-                                }else{
-                                    System.out.println("Você não tem poção mágica comum!"); //sem DanoDoBicho() aqui
-                                }
-                            }else{
-                              if(i1.getPocaoMagica() > 0){//Se houver pocao magica no inventario...
-                                    i1.setSuperPocaoMagica(i1.getSuperPocaoMagica() -1);
-                                    p1.setVida(p1.getVida() + (int)(40 + (float)Math.random()*15)); //Pocao magica comum recupera de 20 a 30 de vida (fazer a super)
-                                    if(p1.getVida() > p1.getVidaTotal()){
-                                        p1.setVida(p1.getVidaTotal());
-                                    }
-                                    System.out.println("Sente-se melhor? Sua vida agora: "+p1.getVida()+"/"+p1.getVidaTotal());
-                                    if(acaoDoBicho() == 0){
-                                        opc = 4;
-                                        resp = 2;
-                                    }
-                                }else{
-                                    System.out.println("Você não tem super poção mágica!"); //sem DanoDoBicho() aqui
-                                }  
-                            }
-                            break;
-                        case 4:
-                            System.out.println("Cooooooorrre!");
-                            if(acaoDoBicho() == 0){
-                                opc = 4;
-                                resp = 2;
-                            }else{
-                               System.out.println("Você fugiu da criatura e está são e salvo!"); 
-                            }
-                            break;
-                        default:
-                            System.out.println("Digito inválido!");
-                    }
-                }while(opc != 4);
+                c1 = getCriatura();
+                FlorestaBatalha batalha = new FlorestaBatalha(p1, f1, c1, i1);
+                resp = batalha.batalha();
             }else if(resp == 3){
                 System.out.println("Vida: "+p1.getVida()+"/"+p1.getVidaTotal()+"\nNivel: "+p1.getNivel()+" - Skill de arqueria: "+p1.getHabilidade()+
                         "\nFlechas de "+f1.getModeloFlecha()+" disponíveis: "+f1.getQtdFlechas()+
@@ -144,6 +51,21 @@ public class Floresta {
             }
         }while(resp != 2);
     }
+    private Criaturas getCriatura(){
+        int numRand;
+        numRand = (int)(p1.getNivel() * (10 * Math.random()));
+        System.out.println("Obtendo numRand: " +numRand);
+        for(int c = 0; c < numTotalDeCriaturas; c++){
+            if(numRand <= listaCriaturas[c].getNumCriatura()){
+                listaCriaturas[c].setVida(listaCriaturas[c].getVidaTotal()); //Como vai utilizar sempre a mesma criatura, devo renovar a vida sempre
+                return listaCriaturas[c];
+            } 
+        }
+        //Se não retornar nada...
+        listaCriaturas[numTotalDeCriaturas -1].setVida(listaCriaturas[numTotalDeCriaturas -1].getVidaTotal());
+        return listaCriaturas[numTotalDeCriaturas - 1]; // a criatura mais poderosa, a última
+        }
+    
     private int acaoDoBicho(){
         int dano;
         dano = (int)(c1.getPoder() * (float)Math.random());
@@ -187,16 +109,16 @@ public class Floresta {
             }while(opc > 4 || opc < 1);
             switch(opc){
                 case 1:
-                    setFlechas(i1.getFlechasMadeira());
+                    f1 = i1.getFlechasMadeira();
                     break;
                 case 2:
-                    setFlechas(i1.getFlechasVidro());
+                    f1 = i1.getFlechasVidro();
                     break;
                 case 3:
-                    setFlechas(i1.getFlechasInox());
+                    f1 = i1.getFlechasInox();
                     break;
                 case 4:
-                    setFlechas(i1.getFlechasObsidiana());
+                    f1 = i1.getFlechasObsidiana();
                     break;
             }
             if(f1.getQtdFlechas() < 1){
@@ -204,12 +126,5 @@ public class Floresta {
             } else{
                 System.out.println("Flecha escolhida! Você está usando a de " + f1.getModeloFlecha()+"!");
             }
-    }
-    private void setFlechas(Flechas f1){
-        this.f1 = f1;
-    }
-    private int getFormulaSeuDano(){ //MUDAR?? VER SE ESTÁ OK...
-        int formulaDano = (int)((float)Math.random()* (p1.getNivel() + p1.getHabilidade()) * (i1.getArcoAtual().getForcaArco() + f1.getForcaFlecha()));
-        return formulaDano;
     }
 }
