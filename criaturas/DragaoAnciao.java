@@ -3,14 +3,7 @@ import pacott.Criaturas;
 
 public class DragaoAnciao extends Criaturas {
     public DragaoAnciao(){
-        setNome("Dragão Ancião");
-        setVidaTotal(140);
-        setVida(getVidaTotal());
-        setPoder(55);
-        setGrunhidos("Sua alma é minha!","Hummm, chegou a janta!","FccHcchcHchhhhhhh");
-        setNumCriatura(50);
-        setLootGold();
-//Loot e exp calculados de acordo com o poder da criatura x numero aleatório
-        setExpDada(); 
+    super("Dragao Anciao", 140, 55, 50, "Sua alma é minha!","Hummm, chegou a janta!","FccHcchcHchhhhhhh");
+        //Nome, vidaTotal, poder, numeroDaCriatura, grunhidos //
     }
 }

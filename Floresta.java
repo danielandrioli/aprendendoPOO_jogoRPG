@@ -54,7 +54,6 @@ public class Floresta {
     private Criaturas getCriatura(){
         int numRand;
         numRand = (int)(p1.getNivel() * (10 * Math.random()));
-        System.out.println("Obtendo numRand: " +numRand);
         for(int c = 0; c < numTotalDeCriaturas; c++){
             if(numRand <= listaCriaturas[c].getNumCriatura()){
                 listaCriaturas[c].setVida(listaCriaturas[c].getVidaTotal()); //Como vai utilizar sempre a mesma criatura, devo renovar a vida sempre

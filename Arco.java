@@ -34,10 +34,10 @@ public class Arco {
                 forcaArco = 1; //POSSO MUDAR A FORCA. N SEI SE ESSA É A IDEAL
                 break;
             case "recurvo":
-                forcaArco = 4;
+                forcaArco = 3;
                 break;
             case "composto":
-                forcaArco = 6;
+                forcaArco = 4;
                 break;
             default:
                 break;

@@ -3,6 +3,9 @@ import pacott.Criaturas;
 
 public class Rato extends Criaturas{
     public Rato(){
+        super("Rato", 15, 4, 5, "Meeeeeep","Meeep meep meep","Meep");
+        //Nome, vidaTotal, poder, numeroDaCriatura, grunhidos //
+   /*
         setNome("Rato");
         setVidaTotal(15);
         setVida(getVidaTotal());
@@ -12,5 +15,6 @@ public class Rato extends Criaturas{
         setLootGold();
 //Loot e exp calculados de acordo com o poder da criatura x numero aleatório
         setExpDada(); 
+*/
     }
 }
